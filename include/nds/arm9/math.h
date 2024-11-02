@@ -71,7 +71,10 @@ extern "C" {
 ///     20.12 denominator.
 static inline void divf32_asynch(int32_t num, int32_t den)
 {
-    REG_DIV_NUMER = ((int64_t)num) << 12;
+    // Casting from uint64_t to int64_t is implementation defined, however
+    // it typically follows 2's complement behavior as is assumed here
+    // https://gcc.gnu.org/onlinedocs/gcc/Integers-implementation.html#Integers-implementation
+    REG_DIV_NUMER = (int64_t)((uint64_t)(int64_t)num << 12);
     REG_DIV_DENOM_L = den;
 
     if ((REG_DIVCNT & DIV_MODE_MASK) != DIV_64_32)
