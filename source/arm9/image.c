@@ -24,7 +24,7 @@ bool image24to16(sImage *img)
         for (int x = 0; x < img->width; x++)
         {
             temp[x + y * img->width] =
-                (1 << 15)
+                (1u << 15)
                 | RGB15(img->image.data8[x * 3 + y * img->width * 3] >> 3,
                         img->image.data8[x * 3 + y * img->width * 3 + 1] >> 3,
                         img->image.data8[x * 3 + y * img->width * 3 + 2] >> 3);
