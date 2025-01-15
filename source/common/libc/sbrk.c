@@ -22,7 +22,7 @@ void *sbrk(int incr)
     const uintptr_t end = (uintptr_t)__end__;
 
     // Trick to get the current stack pointer
-    register uintptr_t stack_ptr asm("sp");
+    uintptr_t stack_ptr = (uintptr_t)__builtin_return_address(0);
 
     // Next address to be used. It is updated after every call to sbrk()
     static uintptr_t heap_start = 0;
